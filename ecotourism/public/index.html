@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecotourism</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+    <!-- home section starts here  -->
+    <section class="home">
+        <div class="home-box">
+            <nav>
+                <div class="logo bars">
+                    <div class="bar">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <h3>Ecotourism 💚 Ukraine</h3>
+                </div>
+                <div class="menu">
+                    <div class="close">
+                        <i class="fa fa-close"></i>
+                    </div>
+                    <ul>
+                        <li><a href="#">Головна</a></li>
+                        <li><a href="#about">Про Нас</a></li>
+                        <li><a href="#camping">Проживання</a></li>
+                        <li><a href="#routes">Піші маршрути</a></li>
+                        <li><a href="#waterfalls">Водоспади</a></li>
+                        <li><a href="/favorites">Збережені</a></li>
+                    </ul>
+                </div>
+                <div class="signup-login">
+                    <a href="/register">Зареєструватися</a>
+                    <a href="/login">Увійти</a>
+                </div>
+            </nav>
+
+            <div class="content">
+                <h5>Ecotourism 💚 Ukraine</h5>
+                <h1>Відвідаємо найзеленіші місця нашої країни</h1>
+                <p>Надихайтеся красою природи, відкривайте нові горизонти та створюйте свої найкращі історії. Тут і зараз починається ваш шлях до пригод!</p>
+                <div class="search">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Почніть з пошуку...">
+                    <button id="search-button">Пошук</button>
+                </div>                          
+            </div>
+        </div>
+    </section>
+    <!-- home section ends here  -->
+
+<!-- travel section starts here -->
+<section id="about" class="travel">
+    <div class="container">
+        <div class="box box1">
+            <img src="./photos/planning.png" alt="Планування">
+            <div class="content">
+                <h4>Легке планування подорожей</h4>
+                <p>З нами ваш відпочинок стає простим і комфортним. Відкривайте унікальні еко-напрямки України, плануйте ваші маршрути, знаходьте найкращі кемпінги та котеджі для ночівлі — все в одному місці.</p>
+            </div>
+        </div>
+        <div class="box box2">
+            <img src="./photos/map.png" alt="Карта">
+            <div class="content">
+                <h4>Індивідуальні маршрути</h4>
+                <p>Обирайте лише те, що вам до душі. Ми допоможемо створити маршрут, який ідеально підходить для вас, будь то активний відпочинок у горах або спокійний кемпінг на природі.</p>
+            </div>
+        </div>
+        <div class="box box3">
+            <img src="./photos/trust.png" alt="Довіра">
+            <div class="content">
+                <h4>Надійність та комфорт</h4>
+                <p>Наш сервіс гарантує якість та комфорт. Обирайте зелені локації України з упевненістю, знаючи, що ми забезпечимо кожну деталь вашого відпочинку з турботою та професіоналізмом.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- travel section ends here -->
+
+<!-- camping section starts here -->
+<section id="camping" class="featured">
+    <div class="gallery">
+       <div class="box box1">
+                <div class="text-content">
+                    <h2 class="heading">Відкрийте кращі локації для кемпінгу</h2>
+                    <p>Знайдіть ідеальне місце для відпочинку на природі. Оцініть затишні кемпінги, унікальні котеджі та неймовірні краєвиди України. Заплануйте свою наступну пригоду прямо зараз!</p>
+                    <a href="/camping" class="btn">Показати всі місця</a>
+                </div>              
+        </div>        
+        <div class="box box2">
+            <img src="./photos/White_eleph.jpg" alt="Кемп “Білий Слон”">
+            <div class="content white-bg">
+                <h2>Кемп “Білий Слон”</h2>
+                <p>Вершини Карпат, неймовірні види та свіже повітря – ідеально для активного відпочинку.</p>
+                <div class="review-and-idr">
+                    <div class="review"><i class="fa fa-star"></i> 4.8 | 1,324 відгуки</div>
+                    <p>від 1000 грн/ніч</p>
+                </div>
+            </div>
+        </div>
+        <div class="box box3">
+            <img src="./photos/bozhena.jpg" alt="Котедж Божена">
+            <div class="content white-bg">
+                <h2>Котедж Божена</h2>
+                <p>Тут є всі умови, щоб розслабитися і насолодитися карпатською природою.</p>
+                <div class="review-and-idr">
+                    <div class="review"><i class="fa fa-star"></i> 4.7 | 778 відгуків</div>
+                    <p>від 1,200 грн/ніч</p>
+                </div>
+            </div>
+        </div>
+        <div class="box box4">
+            <img src="./photos/CHU.jpg" alt="CHU кемпінг">
+            <div class="content white-bg">
+                <h2>CHU кемпінг</h2>
+                <p>Насолоджуйтеся тишею поблизу Коростишівського кар’єру.</p>
+                <div class="review-and-idr">
+                    <div class="review"><i class="fa fa-star"></i> 4.9 | 49 відгуків</div>
+                    <p>від 600 грн/ніч</p>
+                </div>
+            </div>
+        </div>        
+    </div>
+</section>
+<!-- featured section ends here -->
+
+    <!-- destinatons section starts here  -->
+    <section id="routes" class="destinations">
+        <h4 class="label">Піші маршрути</h4>
+        <div class="container">
+            <div class="container-box">
+                <h2 class="heading">Відкрийте нові горизонти через пішохідні маршрути</h2>
+                <div class="content">
+                    <p>Дослідження пішохідних маршрутів відкриває для вас не лише фізичний виклик, а й можливість доторкнутися до неторканих куточків природи. Відкрите серце для гірських пейзажів, чарівних лісових стежок та мальовничих долин. Ці маршрути дозволяють поєднати захоплення від пригод з внутрішнім спокоєм, даючи можливість знайти гармонію між тілом та природою. Час, проведений серед гір і лісів, дає шанс на відновлення сил та неповторні моменти єдності з навколишнім світом.</p>
+                    <a href="/routes">Відкрийте більше <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>    
+            <div class="gallery">
+                <div class="box box1">
+                    <img src="./photos/pik.jpeg" alt="">
+                    <div class="text">
+                        <h2>Пікуй</h2>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <img src="./photos/vysokiy.jpeg" alt="">
+                    <div class="text">
+                        <h2>Високий Верх</h2>
+                    </div>
+                </div>
+                <div class="box box3">
+                    <img src="./photos/goverlas.jpg">
+                    <div class="text" alt="">
+                        <h2>Говерла</h2>
+                    </div>
+                </div>
+                <div class="box box4">
+                    <img src="./photos/homyak.jpg" alt="">
+                    <div class="text">
+                        <h2>Хомяк</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- destinatons section ends here  -->
+
+<!-- waterfalls section starts here -->
+<section id="waterfalls" class="waterfalls">
+    <h4 class="label">Водоспади України</h4>
+    <div class="container">
+        <div class="container-box">
+            <h2 class="heading">Неймовірні водоспади, які варто побачити</h2>
+            <div class="content">
+                <p>Українські водоспади — це справжні природні скарби, які заворожують своєю красою. Від могутнього Шипота до чарівного Пробія, кожен водоспад має свою унікальну атмосферу. Відвідайте ці місця, щоб відчути силу природи, освіжитися і надихнутися. Водоспади дарують незабутні враження і стають ідеальним місцем для відпочинку серед шуму води та свіжого повітря.</p>
+                <a href="/waterfalls">Відкрийте більше <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="gallery">
+        <div class="box box1">
+            <img src="./photos/shypit.jpg" alt="Водоспад Шипіт">
+            <div class="text">
+                <h2>Шипіт</h2>
+            </div>
+        </div>
+        <div class="box box2">
+            <img src="./photos/probii.jpeg" alt="Водоспад Пробій">
+            <div class="text">
+                <h2>Пробій</h2>
+            </div>
+        </div>
+        <div class="box box3">
+            <img src="./photos/dzyrin.jpg" alt="Водоспад Джурин">
+            <div class="text">
+                <h2>Джурин</h2>
+            </div>
+        </div>
+        <div class="box box4">
+            <img src="./photos/manyavskiy.jpeg" alt="Водоспад Манявський">
+            <div class="text">
+                <h2>Манявський</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- waterfalls section ends here -->
+
+    <!-- feedback section starts here  -->
+    <section class="feedback">
+        <div class="container">
+            <h2 class="heading">Реальні історії туристів</h2>
+        </div>
+        <div class="voices">
+            <div class="voice box1">
+                <div class="profile">
+                    <img src="./photos/woman1.jpg" alt="">
+                    <div class="detail">
+                        <li>Оксана</li>
+                        <li>користувачка</li>
+                    </div>
+                </div>
+                <p>«Завдяки цьому сайту я знайшла найкращі маршрути для піших прогулянок у Карпатах. Можливість зберігати улюблені локації допомогла мені створити ідеальний маршрут для подорожі. Рекомендую всім любителям природи!»</p>
+            </div>
+            <div class="voice box2">
+                <div class="profile">
+                    <img src="./photos/man.jpg" alt="">
+                    <div class="detail">
+                        <li>Андрій</li>
+                        <li>користувач</li>
+                    </div>
+                </div>
+                <p>«Сайт дуже зручний і зрозумілий. Я відкрив для себе нові водоспади та кемпінгові локації в Україні. Мені сподобалось, що можна швидко зберегти місця, які хочеться відвідати, і повернутися до планування подорожі у будь-який момент.»</p>
+            </div>
+            <div class="voice box3">
+                <div class="profile">
+                    <img src="./photos/woman2.jpg" alt=и">
+                    <div class="detail">
+                        <li>Катерина</li>
+                        <li>користувачка</li>
+                    </div>
+                </div>
+                <p>«Мені дуже сподобався цей ресурс! Завдяки ньому я знайшла ідеальні місця для відпочинку в горах. Інформація на сайті структурована, а можливість зберігати локації стала дуже корисною функцією. Дуже дякую!»</p>
+            </div>
+        </div>
+    </section>
+    <!-- feedback section ends here  -->
+
+<!-- article section starts here -->
+<section id="article" class="article">
+    <h4 class="label">Ресурси</h4>
+    <h2 class="heading">Останні новини</h2>
+    <div class="container">
+        <div class="latest-article">
+            <a href="https://travel.24tv.ua/ekoturizm-5-kutochkiv-ukrayini-dlya-chistogo-vidpochinku_n1872887" target="_blank">
+                <img src="./photos/article1.jpg" alt="">
+            </a>
+            <p>Екотуризм</p>
+            <h3>Екотуризм: 5 куточків України для "чистого" відпочинку</h3>
+        </div>
+        <div class="more-article">
+            <div class="box box1">
+                <div class="image">
+                    <a href="https://www.products.pcc.eu/uk/blog/%D1%89%D0%BE-%D1%82%D0%B0%D0%BA%D0%B5-%D0%B2%D1%83%D0%B3%D0%BB%D0%B5%D1%86%D0%B5%D0%B2%D0%B8%D0%B9-%D1%81%D0%BB%D1%96%D0%B4-%D1%96-%D1%8F%D0%BA-%D0%BC%D0%B8-%D0%BC%D0%BE%D0%B6%D0%B5%D0%BC%D0%BE-%D0%B9/" target="_blank">
+                        <img src="./photos/sustainable-tourism.jpg" alt="">
+                    </a>
+                </div>
+                <div class="text">
+                    <h3>Поради з екотуризму: Як зменшити вуглецевий слід під час подорожі</h3>
+                    <li>Еко-подорожі - 6 хвилин читання</li>
+                </div>
+            </div>
+            <div class="box box2">
+                <div class="image">
+                    <a href="https://www.0352.ua/news/3219560/krasi-ekogoteli-ukraini" target="_blank">
+                        <img src="./photos/green-hotel.jpg" alt="">
+                    </a>
+                </div>
+                <div class="text">
+                    <h3>Найкращі еко-готелі для відпочинку в Україні</h3>
+                    <li>Житло - 5 хвилин читання</li>
+                </div>
+            </div>
+            <div class="box box3">
+                <div class="image">
+                    <a href="https://natur-boutique.ua/blogs/yak-proyshov-organic-tour-10" target="_blank">
+                        <img src="./photos/eco.jpg" alt="">
+                    </a>
+                </div>
+                <div class="text">
+                    <h3>Як пройшов Organic Tour 10</h3>
+                    <li>Еко - 3 хвилин читання</li>
+                </div>
+            </div>
+            <div class="box box4">
+                <div class="image">
+                    <a href="https://www.unian.ua/tourism/lifehacking/vidpovidalniy-turizm-sim-porad-yak-zrobiti-svoji-podorozhi-bilsh-ekologichnimi-12508767.html" target="_blank">
+                        <img src="./photos/green-tips.jpg" alt="">
+                    </a>
+                </div>
+                <div class="text">
+                    <h3>7 порад для екологічно чистої подорожі</h3>
+                    <li>Поради для мандрівників - 5 хвилин читання</li>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- article section ends here -->
+
+<!-- Map Section -->
+<section id="map-section" class="map-section">
+    <h4 class="label">Карта</h4>
+    <div class="container">
+        <h2 class="heading">Відкрийте екологічні маршрути України</h2>
+        <div id="map" style="height: 400px;"></div>
+    </div>
+</section>
+
+<script>
+    var map = L.map('map').setView([49.4167, 32.0625], 6); 
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var marker1 = L.marker([49.4167, 32.0625]).addTo(map)
+        .bindPopup('<b>Екологічний маршрут</b><br>Черкащина');
+
+        var marker1 = L.marker([48.65717127223163, 23.26871275325897]).addTo(map)
+        .bindPopup('<b>Водоспад Шипіт</b><br>Закарпатська область');
+
+        var marker1 = L.marker([48.10638246238643, 24.729814880675473]).addTo(map)
+        .bindPopup('<b>Кемп “Білий Слон”</b><br>Дземброня');
+
+    var marker2 = L.marker([48.9226, 24.7111]).addTo(map) 
+        .bindPopup('<b>Екологічний маршрут</b><br>Карпати');
+
+    var marker3 = L.marker([46.4825, 30.7233]).addTo(map) 
+        .bindPopup('<b>Екологічний маршрут</b><br>Одещина');
+
+    var marker4 = L.marker([50.4501, 30.5234]).addTo(map) 
+        .bindPopup('<b>Екологічний маршрут</b><br>Київський регіон');
+</script>
+
+    <!-- footer section starts here -->
+<footer>
+    <section class="footer">
+        <div class="container">
+            <div class="detail">
+                <h3>Ecotourism 💚 Ukraine</h3>
+                <p>Ваші пригоди чекають на вас! Відкривайте приховані куточки України, занурюйтеся в унікальну природу та створюйте незабутні спогади. Піші походи, активний відпочинок, відновлення на природі – ми пропонуємо екологічно чисті маршрути, що підійдуть кожному. Ваша подорож починається тут, з нами.</p>
+                <h5>Зв'язатися з нами</h5>
+                <a href="mailto:example@mail.com">example@mail.com</a>
+                <div class="social">
+                    <a href="#"><i class="fa fa-linkedin-square"></i></a>
+                    <a href="#"><i class="fa fa-facebook-square"></i></a>
+                    <a href="#"><i class="fa fa-twitter-square"></i></a>
+                </div>
+            </div>
+            <div class="about-us">
+                <ul>
+                    <li><a href="#about">Про нас</a></li>
+                    <li><a href="#camping">Кемпінг</a></li>
+                    <li><a href="#routes">Піші маршрути</a></li>
+                    <li><a href="#waterfalls">Водоспади</a></li>
+                    <li><a href="#article">Блог</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div>
+                &copy;2024 - Ecotourism 💚 Ukraine, inc, all rights reserved
+            </div>
+            <div>
+                <a href="#">term & conditions</a>
+                <a href="#">privacy policy</a>
+            </div>
+        </div>
+    </section>
+</footer>
+<!-- footer section ends here -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>  
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</body>
+</html>

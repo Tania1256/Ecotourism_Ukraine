@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Водоспади</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: all .3s ease;
+        }
+
+        nav {
+            width: 100%;
+            height: 65px;
+            backdrop-filter: blur(1px);
+            border-radius: .7rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0 2rem;
+            z-index: 10;
+        }
+
+        nav .logo h3 {
+            color: var(--green-color);
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        :root {
+            --dark-green: #122b1d;
+            --green-color: #015743;
+            --white-color: #fff;
+            --light-gray: #f4f4f4;
+            --border-color: #ddd;
+        }
+
+        body {
+            background-color: var(--white-color);
+            color: var(--dark-green);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--green-color);
+            margin-bottom: 2rem;
+        }
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: var(--white-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem;
+            width: calc(33% - 2rem);
+            height: 480px; /* Вища висота для включення форми */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all .3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--green-color);
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .height {
+            font-weight: bold;
+            color: var(--green-color);
+        }
+
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-top: auto; /* Додаємо відступ перед кнопкою */
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background-color: var(--green-color);
+            color: var(--white-color);
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        button:hover {
+            background-color: #02636e;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            li {
+                width: calc(50% - 2rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            li {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="/"><h3>Ecotourism 💚 Ukraine</h3></a>
+        </div>
+    </nav>
+    <h1>Список водоспадів</h1>
+    <ul>
+        <% waterfalls.forEach(waterfall => { %>
+            <li>
+                <h2><%= waterfall.name %></h2>
+                <p><%= waterfall.description %></p>
+                <p class="height">Висота: <%= waterfall.height_m %> м</p>
+                <img src="/photos/<%= waterfall.image_url %>" alt="<%= waterfall.name %>">
+                <!-- Форма для збереження в улюблені -->
+                <form action="/save-favorites" method="POST">
+                    <input type="hidden" name="userId" value="1"> <!-- Замінити на ID користувача -->
+                    <input type="hidden" name="waterfallId" value="<%= waterfall.id %>">
+                    <button type="submit">Зберегти до улюблених</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сторінка не знайдена</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --dark-green: #122b1d;
+            --green-color: #015743;
+            --light-green: #7fcdbb;
+            --white-color: #fff;
+        }
+
+        body {
+            background-color: var(--dark-green);
+            color: var(--white-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            color: var(--light-green);
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--white-color);
+        }
+
+        a {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            color: var(--white-color);
+            background-color: var(--green-color);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: var(--light-green);
+            color: var(--dark-green);
+        }
+
+        .error-icon {
+            font-size: 8rem;
+            color: var(--light-green);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-icon">😔</div>
+    <h1>404</h1>
+    <p>На жаль, сторінку не знайдено. Можливо, ви помилилися в адресі.</p>
+    <a href="/">Повернутися на головну</a>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маршрути</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: all .3s ease;
+        }
+
+        :root {
+            --dark-green: #122b1d;
+            --green-color: #015743;
+            --white-color: #fff;
+            --light-gray: #f4f4f4;
+            --border-color: #ddd;
+        }
+
+        body {
+            background-color: var(--white-color);
+            color: var(--dark-green);
+            display: flex;
+            flex-direction: row;
+            padding: 2rem;
+            gap: 2rem;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--green-color);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar {
+            width: 300px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            background-color: var(--light-gray);
+            position: sticky;
+            top: 1rem;
+            height: fit-content;
+        }
+
+        .sidebar h2 {
+            font-size: 1.5rem;
+            color: var(--green-color);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .sidebar select, .sidebar button {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            flex: 1;
+            min-height: 400px; /* Мінімальна висота для стабільності */
+        }
+
+        li {
+            display: flex;
+            background-color: var(--white-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all .3s ease;
+            position: relative; /* Для кнопки у нижньому правому куті */
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            width: 320px;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 8px 0 0 8px;
+            flex-shrink: 0;
+        }
+
+        .content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--green-color);
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .info {
+            font-weight: bold;
+            color: var(--green-color);
+        }
+
+        /* Кнопка у правому нижньому куті */
+        .favorite-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: var(--green-color);
+            color: var(--white-color);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .favorite-button:hover {
+            background-color: #02636e;
+        }
+
+        .no-results {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+            }
+
+            main {
+                width: 100%;
+            }
+
+            li {
+                flex-direction: column;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px 8px 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>Фільтри</h2>
+        <form method="GET" action="/routes">
+            <label for="distance">Довжина маршруту:</label>
+            <select id="distance" name="distance">
+                <option value="" <%= !distance ? "selected" : "" %>>Усі</option>
+                <option value="short" <%= distance === 'short' ? "selected" : "" %>>Менше 10 км</option>
+                <option value="medium" <%= distance === 'medium' ? "selected" : "" %>>10-20 км</option>
+                <option value="long" <%= distance === 'long' ? "selected" : "" %>>Більше 20 км</option>
+            </select>
+            <button type="submit">Застосувати</button>
+        </form>
+    </aside>    
+
+    <main>
+        <h1>Список маршрутів</h1>
+        <ul>
+            <% if (routes.length === 0) { %>
+                <p class="no-results">На жаль, маршрутів за вибраними критеріями не знайдено.</p>
+            <% } else { %>
+                <% routes.forEach(route => { %>
+                    <li>
+                        <img src="/photos/<%= route.image_url %>" alt="<%= route.name %>">
+                        <div class="content">
+                            <h2><%= route.name %></h2>
+                            <p><%= route.description %></p>
+                            <p><span class="info">Дистанція:</span> <%= route.distance_km %> км</p>
+                            <p><span class="info">Загальний підйом:</span> <%= route.total_ascent %> м</p>
+                            <p><span class="info">Загальний спуск:</span> <%= route.total_descent %> м</p>
+                            <p><span class="info">Мінімальна висота:</span> <%= route.min_altitude %> м</p>
+                            <p><span class="info">Максимальна висота:</span> <%= route.max_altitude %> м</p>
+                        </div>
+                        <!-- Кнопка зберегти до улюблених -->
+                        <form action="/save-favorites" method="POST" class="favorite-form">
+                            <input type="hidden" name="userId" value="1">
+                            <input type="hidden" name="routeId" value="<%= route.id %>">
+                            <button type="submit" class="favorite-button">Зберегти до улюблених</button>
+                        </form>
+                    </li>
+                <% }); %>
+            <% } %>
+        </ul>
+    </main>
+</body>
+</html>

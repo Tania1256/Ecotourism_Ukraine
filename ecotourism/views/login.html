@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Увійти</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            transition: all .3s ease;
+            text-decoration: none;
+        }
+
+        :root {
+            --dark-green: #122b1d;
+            --green-color: #015743;
+            --white-color: #fff;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--white-color);
+            padding: 1rem;
+            margin: 0;
+        }
+
+        .background-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./photos/background_home.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-radius: .5rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            padding: .5rem;
+            position: relative;
+        }
+
+        nav {
+            width: 100%;
+            height: 65px;
+            backdrop-filter: blur(1px);
+            border-radius: .7rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0 2rem;
+            z-index: 10;
+        }
+
+        nav .logo h3 {
+            color: var(--white-color);
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .container {
+            background: var(--white-color);
+            color: var(--dark-green);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .container h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        label {
+            font-size: 0.8rem;
+        }
+
+        input {
+            padding: 0.6rem;
+            font-size: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--green-color);
+        }
+
+        button {
+            background-color: var(--green-color);
+            color: var(--white-color);
+            padding: 0.6rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        button:hover {
+            background-color: #02636e;
+        }
+
+        p {
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        a {
+            color: var(--green-color);
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: var(--dark-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container">
+        <nav>
+            <div class="logo">
+                <a href="/"><h3>Ecotourism 💚 Ukraine</h3></a>
+            </div>
+        </nav>
+
+        <div class="container">
+            <h1>Увійти</h1>
+            <form action="/login" method="POST">
+                <label for="username">Ім'я користувача:</label>
+                <input type="text" name="username" id="username" placeholder="Ваше ім'я" required>
+
+                <label for="password">Пароль:</label>
+                <input type="password" name="password" id="password" placeholder="Ваш пароль" required>
+
+                <button type="submit">Увійти</button>
+            </form>
+
+            <p>Ще не маєте акаунт? <a href="/register">Зареєструватися</a></p>
+        </div>
+    </div>
+</body>
+</html>

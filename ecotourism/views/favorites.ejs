@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вподобані локації</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            transition: all .3s ease;
+        }
+
+        :root {
+            --dark-green: #122b1d;
+            --green-color: #015743;
+            --white-color: #fff;
+        }
+
+        body {
+            background-color: var(--white-color);
+            padding: 2rem;
+            color: var(--dark-green);
+        }
+
+        nav {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;  
+    justify-content: flex-start; 
+    border-radius: .7rem;
+    background: rgba(28, 75, 58, 0.555);
+    padding: 0 2rem; 
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+nav .logo {
+    display: flex;
+    align-items: center; 
+    gap: 1rem;  
+}
+
+
+        nav .logo h3 {
+            color: var(--white-color);
+            font-weight: 600;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 50px; 
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background: var(--white-color);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .remove-favorite-form {
+            text-align: right;
+        }
+
+        button {
+            background-color: var(--green-color);
+            color: var(--white-color);
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        button:hover {
+            background-color: #02636e;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--green-color);
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: var(--dark-green);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="/"><h3>Ecotourism 💚 Ukraine</h3></a>
+        </div>
+    </nav>
+
+    <h1>Вподобано Вами</h1>
+    <ul>
+        <% favorites.forEach(favorite => { %>
+            <li>
+                <h2><%= favorite.camping_name %></h2>
+                <p><%= favorite.description %></p>
+                <img src="</photos/%= favorite.image_url %>" alt="<%= favorite.camping_name %>">
+                <form class="remove-favorite-form" data-camping-id="<%= favorite.camping_id %>" onsubmit="removeFavorite(event, '<%= favorite.camping_id %>')">
+                    <button type="submit">Видалити</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+
+    <script>
+        // Функція для видалення локації
+        function removeFavorite(event, campingId) {
+            event.preventDefault(); 
+
+            fetch(`/remove-favorite/${campingId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Локацію видалено з улюблених!');
+                    window.location.reload();
+                } else {
+                    alert('Сталася помилка!');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
