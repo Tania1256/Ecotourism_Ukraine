@@ -22,9 +22,9 @@ Welcome to our Ecotourism Website project! This platform is designed to promote 
 
 ## Demo Screenshot
 
-![](D:/Веб курсова/Ecotourism_Ukraine/ecotourism/screen1.png)
-![](D:\Веб курсова\Ecotourism_Ukraine\ecotourism\screen2.png)
-![](D:\Веб курсова\Ecotourism_Ukraine\ecotourism\screen3.png)
+![](Ecotourism_Ukraine/ecotourism/screen1.png)
+![](Ecotourism_Ukraine\ecotourism\screen2.png)
+![](Ecotourism_Ukraine\ecotourism\screen3.png)
 
 ## Explore
 
