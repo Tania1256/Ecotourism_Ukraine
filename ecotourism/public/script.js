@@ -89,24 +89,65 @@ function galleryAnimation(triggerSelector, boxSelectors) {
     });
 }
 
-document.getElementById('search-button').addEventListener('click', function() {
-    const query = document.getElementById('search-input').value;
-    console.log('Search button clicked');
-    console.log('Query:', query); 
-    
-    if (query) {
-        fetch(`/search?query=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Data from search:', data); 
-            })
-            .catch(err => console.error('Error during search:', err));
-    } else {
-        alert('Будь ласка, введіть текст для пошуку');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+const voices = document.querySelector('.voices');
+const dotsContainer = document.querySelector('.dots-container');
+let currentIndex = 0;
+const totalVoices = document.querySelectorAll('.voice').length;
+
+// Додаємо точки навігації
+function createDots() {
+    for (let i = 0; i < totalVoices; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        dot.addEventListener('click', () => {
+            currentIndex = i;
+            updateSlider();
+        });
+        dotsContainer.appendChild(dot);
     }
+}
+
+// Оновлюємо слайдер
+function updateSlider() {
+    voices.style.transform = `translateX(-${currentIndex * 350}px)`;  // Зсув на ширину одного відгука
+
+    // Оновлюємо активну точку
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+        dot.classList.remove('active');
+        if (index === currentIndex) {
+            dot.classList.add('active');
+        }
+    });
+}
+
+// Кнопка "Попередній"
+prevButton.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+    } else {
+        currentIndex = totalVoices - 1;  // Перехід до останнього відгука
+    }
+    updateSlider();
 });
 
-animateContent([".home .content h5, .home .content h1, .home .content p, .home .content .search"]);
+// Кнопка "Наступний"
+nextButton.addEventListener('click', () => {
+    if (currentIndex < totalVoices - 1) {
+        currentIndex++;
+    } else {
+        currentIndex = 0;  // Перехід до першого відгука
+    }
+    updateSlider();
+});
+
+// Ініціалізація слайдера
+createDots();
+updateSlider();
+
+animateContent([".home .content h5, .home .content h1, .home .content p, .home .content .learn-more-btn"]);
 
 scrollTirggerAnimation(".travel", [".travel .box1", ".travel .box2", ".travel .box3"]);
 

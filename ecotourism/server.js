@@ -37,36 +37,6 @@ app.get('/', (req, res) => {
 app.set('view engine', 'ejs'); 
 app.set('views', path.join(__dirname, 'views')); 
 
-app.get('/search', (req, res) => {
-  const query = req.query.query;
-
-  if (!query) {
-      return res.status(400).json({ message: "Query parameter is missing" });
-  }
-
-  const searchQuery = `
-      SELECT 'camping' AS type, name, description, image_url
-      FROM Campings
-      WHERE name LIKE ? OR description LIKE ?
-      UNION ALL
-      SELECT 'route' AS type, name, description, image_url
-      FROM Routes
-      WHERE name LIKE ? OR description LIKE ?
-      UNION ALL
-      SELECT 'waterfall' AS type, name, description, image_url
-      FROM Waterfalls
-      WHERE name LIKE ? OR description LIKE ?
-  `;
-
-  db.query(searchQuery, [`%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`], (err, results) => {
-      if (err) {
-          return res.status(500).json({ message: 'Database query failed' });
-      }
-
-      res.json(results);
-  });
-});
-
 // Маршрути для інших сторінок
 // Сторінка для кемпінгів
 app.get('/camping', (req, res) => {
@@ -193,22 +163,63 @@ app.get('/favorites', (req, res) => {
 });
 
 // Маршрут для видалення локації з уподобаних
-app.delete('/remove-favorite/:campingId', (req, res) => {
-  const userId = 1; 
-  const campingId = req.params.campingId; 
+app.delete('/remove-favorite/:type/:id', (req, res) => {
+  const userId = 1; // Це значення має бути актуальним, якщо ви використовуєте сесії або JWT для авторизації
+  const { type, id } = req.params;
 
-  const query = `DELETE FROM Favorites WHERE user_id = ? AND camping_id = ?`;
-  db.query(query, [userId, campingId], (err, result) => {
+  // Логування параметрів
+  console.log(`Запит на видалення локації: тип = ${type}, id = ${id}, userId = ${userId}`);
+
+  // Перевірка наявності локації перед видаленням
+  let checkQuery;
+  if (type === 'camping') {
+    checkQuery = `SELECT * FROM Favorites WHERE user_id = ? AND camping_id = ?`;
+  } else if (type === 'route') {
+    checkQuery = `SELECT * FROM Favorites WHERE user_id = ? AND route_id = ?`;
+  } else if (type === 'waterfall') {
+    checkQuery = `SELECT * FROM Favorites WHERE user_id = ? AND waterfall_id = ?`;
+  } else {
+    return res.status(400).send('Invalid type');
+  }
+
+  db.query(checkQuery, [userId, id], (err, results) => {
+    if (err) {
+      console.error('Помилка при перевірці локації:', err);
+      return res.status(500).send('Сталася помилка на сервері');
+    }
+
+    if (results.length === 0) {
+      // Якщо локація не знайдена у вподобаних
+      return res.status(404).send('Локація не знайдена у вподобаних');
+    }
+
+    // Логування запиту на видалення
+    let deleteQuery;
+    if (type === 'camping') {
+      deleteQuery = `DELETE FROM Favorites WHERE user_id = ? AND camping_id = ?`;
+    } else if (type === 'route') {
+      deleteQuery = `DELETE FROM Favorites WHERE user_id = ? AND route_id = ?`;
+    } else if (type === 'waterfall') {
+      deleteQuery = `DELETE FROM Favorites WHERE user_id = ? AND waterfall_id = ?`;
+    }
+
+    // Логування запиту на видалення
+    console.log('Запит на видалення:', deleteQuery);
+
+    // Виконуємо видалення
+    db.query(deleteQuery, [userId, id], (err, result) => {
       if (err) {
-          console.error('Помилка при видаленні:', err);
-          return res.status(500).send('Сталася помилка на сервері');
+        console.error('Помилка при видаленні:', err);
+        return res.status(500).send('Сталася помилка на сервері');
       }
 
       if (result.affectedRows === 0) {
-          return res.status(404).send('Локація не знайдена у вподобаних');
+        return res.status(404).send('Локація не знайдена у вподобаних');
       }
 
-      res.sendStatus(200); 
+      console.log('Локація успішно видалена');
+      res.sendStatus(200); // Повертаємо успішний статус
+    });
   });
 });
 

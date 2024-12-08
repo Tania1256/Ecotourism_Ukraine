@@ -28,26 +28,25 @@
         }
 
         nav {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;  
-    justify-content: flex-start; 
-    border-radius: .7rem;
-    background: rgba(28, 75, 58, 0.555);
-    padding: 0 2rem; 
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 100;
-}
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            border-radius: .7rem;
+            background: rgba(28, 75, 58, 0.555);
+            padding: 0 2rem;
+            position: relative;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
 
-nav .logo {
-    display: flex;
-    align-items: center; 
-    gap: 1rem;  
-}
-
+        nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
         nav .logo h3 {
             color: var(--white-color);
@@ -57,74 +56,99 @@ nav .logo {
         }
 
         h1 {
+            color: var(--green-color);
             text-align: center;
             font-size: 2rem;
-            margin-top: 50px; 
+            margin-top: 20px;
             margin-bottom: 1.5rem;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    overflow-x: auto; 
+    flex-wrap: nowrap; 
+    gap: 2rem; 
+}
 
-        li {
-            background: var(--white-color);
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1.2rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+li {
+    background: var(--white-color);
+    border: 1px solid #ddd;
+    border-radius: 12px; 
+    padding: 1.2rem;
+    width: 250px; 
+    height: 380px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
 
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
+li:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
 
-        p {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: #555;
-        }
+img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    margin-bottom: 1rem;
+}
 
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
+h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark-green);
+}
 
-        .remove-favorite-form {
-            text-align: right;
-        }
+p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    height: 50px; 
+    overflow: hidden; 
+}
 
-        button {
-            background-color: var(--green-color);
-            color: var(--white-color);
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
+.remove-favorite-form {
+    text-align: right;
+}
 
-        button:hover {
-            background-color: #02636e;
-        }
+button {
+    background-color: var(--green-color);
+    color: var(--white-color);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
 
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--green-color);
-            font-weight: 500;
-        }
+button:hover {
+    background-color: #02636e;
+    transform: scale(1.05);
+}
 
-        a:hover {
-            color: var(--dark-green);
-        }
+a {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--green-color);
+    font-weight: 500;
+}
+
+a:hover {
+    color: var(--dark-green);
+}
     </style>
 </head>
 <body>
@@ -140,29 +164,31 @@ nav .logo {
             <li>
                 <h2><%= favorite.camping_name %></h2>
                 <p><%= favorite.description %></p>
-                <img src="</photos/%= favorite.image_url %>" alt="<%= favorite.camping_name %>">
-                <form class="remove-favorite-form" data-camping-id="<%= favorite.camping_id %>" onsubmit="removeFavorite(event, '<%= favorite.camping_id %>')">
+                <img src="/photos/<%= favorite.image_url %>" alt="<%= favorite.camping_name %>">
+                <form class="remove-favorite-form" onsubmit="removeFavorite(event, '<%= favorite.camping_id %>')">
                     <button type="submit">Видалити</button>
-                </form>
+                </form>                                     
             </li>
         <% }); %>
     </ul>
 
     <script>
-        // Функція для видалення локації
         function removeFavorite(event, campingId) {
-            event.preventDefault(); 
+            event.preventDefault(); // Запобігає відправці форми
 
             fetch(`/remove-favorite/${campingId}`, {
-                method: 'DELETE',
+                method: 'DELETE',  // Метод запиту - DELETE
             })
             .then(response => {
                 if (response.ok) {
                     alert('Локацію видалено з улюблених!');
-                    window.location.reload();
+                    window.location.reload();  // Перезавантаження сторінки після видалення
                 } else {
                     alert('Сталася помилка!');
                 }
+            })
+            .catch(error => {
+                console.error('Помилка:', error);
             });
         }
     </script>
