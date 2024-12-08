@@ -26,9 +26,6 @@ Welcome to our Ecotourism Website project! This platform is designed to promote 
 ![](ecotourism/screen2.png)
 ![](ecotourism/screen3.png)
 
-## Explore
-
-➥ [Live Demo](https://yourprojectlink.com)
 
 ## How to Run the Project Locally
 
